@@ -35,6 +35,7 @@ def root():
 async def webhook(payload: WebhookPayload, request: Request):
     if payload.challenge:
         return Response(content=payload.challenge, media_type="text/plain")
+    return {"ok": True}
 
 
     data = await request.json()
