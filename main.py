@@ -3,6 +3,7 @@ from pydantic import BaseModel
 import httpx
 import os
 from msal import ConfidentialClientApplication
+from fastapi.responses import Response
 
 app = FastAPI()
 
@@ -33,7 +34,8 @@ def root():
 @app.post("/webhook")
 async def webhook(payload: WebhookPayload, request: Request):
     if payload.challenge:
-        return payload.challenge
+        return Response(content=payload.challenge, media_type="text/plain")
+
 
     data = await request.json()
     pulse_id = data['event']['pulseId']
