@@ -7,10 +7,10 @@ from msal import ConfidentialClientApplication
 app = FastAPI()
 
 # Variáveis de ambiente
-TENANT_ID = os.getenv("1436d330-e66f-494a-a875-019ab08f0fb2")
-CLIENT_ID = os.getenv("ff6a39d1-f4ac-4cb5-9a7e-2a56075600b0")
-CLIENT_SECRET = os.getenv("0kB8Q~Lz1HFSeVXYzjdyDIg8p3ibDottxb9GcbJC")
-MONDAY_API_KEY = os.getenv("eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjUwOTA5Njc2NSwiYWFpIjoxMSwidWlkIjo3NTczODMwOSwiaWFkIjoiMjAyNS0wNS0wNlQxNjozNzowOS4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6Mjk0MDA0ODQsInJnbiI6InVzZTEifQ.BvAgqehIqjQEjwBdm4EV6nSPeT89ta2kVK06BzkUTHk")
+TENANT_ID = os.getenv("TENANT_ID")
+CLIENT_ID = os.getenv("CLIENT_ID")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")
+MONDAY_API_KEY = os.getenv("MONDAY_API_KEY")
 
 # Modelo do payload
 class WebhookPayload(BaseModel):
