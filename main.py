@@ -1,43 +1,9 @@
-from fastapi import FastAPI, Request
-from pydantic import BaseModel
-import httpx
-import os
-from msal import ConfidentialClientApplication
-from fastapi.responses import Response
-
-app = FastAPI()
-
-# Variáveis de ambiente
-TENANT_ID = os.getenv("TENANT_ID")
-CLIENT_ID = os.getenv("CLIENT_ID")
-CLIENT_SECRET = os.getenv("CLIENT_SECRET")
-MONDAY_API_KEY = os.getenv("MONDAY_API_KEY")
-
-# Modelo do payload
-class WebhookPayload(BaseModel):
-    challenge: str | None = None
-    event: dict | None = None
-
-def get_azure_token():
-    app = ConfidentialClientApplication(
-        client_id=CLIENT_ID,
-        client_credential=CLIENT_SECRET,
-        authority=f"https://login.microsoftonline.com/{TENANT_ID}"
-    )
-    token = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.default"])
-    return token["access_token"]
-
-@app.get("/")
-def root():
-    return {"message": "FastAPI rodando com sucesso"}
-
 @app.post("/webhook")
 async def webhook(payload: WebhookPayload, request: Request):
     if payload.challenge:
         return Response(content=payload.challenge, media_type="text/plain")
-    return {"ok": True}
 
-
+    # ↓ esse trecho só é executado em chamadas reais (depois do desafio)
     data = await request.json()
     pulse_id = data['event']['pulseId']
     board_id = data['event']['boardId']
