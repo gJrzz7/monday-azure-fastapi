@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: monday-azure-fastapi
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: MONDAY_API_KEY
+        value: "SUA_API_KEY_DO_MONDAY"
+      - key: AZURE_TOKEN
+        value: "SEU_TOKEN_BEARER_DO_AZURE"
